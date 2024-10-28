@@ -7,7 +7,6 @@ import { BackgroundLayout, WeatherCard, MiniCard } from './components'
 function App() {
   const [input, setInput] = useState('')
   const { weather, thisLocation, values, place, setPlace } = useStateContext()
-  console.log(weather)
 
   const submitCity = () => {
     setPlace(input)
@@ -15,12 +14,14 @@ function App() {
   }
 
   return (
-    <div className='w-full h-screen text-white px-8'>
-      <nav className='w-full p-3 flex justify-between items-center'>
-        <h1 className='font-bold tracking-wide text-3xl'>Weather App</h1>
-        <div className='bg-white w-[15rem] overflow-hidden shadow-2xl rounded flex items-center p-2 gap-2'>
+    <div className='w-full min-h-screen text-white px-4 lg:px-8'>
+      <nav className='w-full p-3 flex flex-col sm:flex-row justify-between items-center'>
+        <h1 className='font-bold tracking-wide text-2xl sm:text-3xl mb-4 sm:mb-0'>Weather App</h1>
+        <div className='bg-white w-full sm:w-[15rem] overflow-hidden shadow-2xl rounded flex items-center p-2 gap-2'>
           <img src={search} alt="search" className='w-[1.5rem] h-[1.5rem]' />
           <input 
+            id="city-search"
+            name="city-search"
             onKeyUp={(e) => {
               if (e.key === 'Enter') {
                 submitCity()
@@ -35,7 +36,7 @@ function App() {
         </div>
       </nav>
       <BackgroundLayout />
-      <main className='w-full flex flex-wrap gap-8 py-4 px-[10%] items-center justify-center'>
+      <main className='w-full flex flex-col lg:flex-row gap-8 py-4 px-4 lg:px-[10%] items-center justify-center'>
         <WeatherCard
           place={thisLocation}
           windspeed={weather.wspd}
@@ -46,7 +47,7 @@ function App() {
           conditions={weather.conditions}
         />
 
-        <div className='flex justify-center gap-8 flex-wrap w-[60%]'>
+        <div className='flex justify-center gap-8 flex-wrap w-full lg:w-[60%]'>
           {
             values?.slice(1, 7).map(curr => {
               return (
